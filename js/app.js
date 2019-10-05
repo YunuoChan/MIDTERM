@@ -18,12 +18,12 @@ $(function(){
             const getNews = await getMyNews();
             const news_list = getNews.articles;
             var getNewsTotalResult = getNews.totalResults;
-
             NewsTotalResults(getNews.totalResults);
 
+          
             news_list.forEach(function(res){
                
-                NewsItem(res.urlToImage, res.title, res.author, res.url)
+                NewsItem(res.urlToImage, res.title, res.author, res.description, res.url, res.source.name)
             });
             
         }
@@ -40,12 +40,16 @@ $(function(){
         resText.text(`You have ${res} results`);
     }
 
-    function NewsItem(image, title, author, description, url){
+    function NewsItem(image, title, author, description, url, name){
         var item = `<li>
                     <img src="${image}" alt="">
-                    <p>${title}</p>
-                    <p>${author}</p>
-                    <a href="${url}">${url}</a>
+                    
+                    <h3>${title}</h3>
+                    <p>${name}</p>
+                     <p>${description}</p>
+                     <p href="${name}">${name}</p>
+                     <button href="${url}" type="button">Go to page</button>
+                  
                     </li>`;
    
             list.append(item);
